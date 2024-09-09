@@ -18,3 +18,4 @@ locals {
     Example = var.env
   }
 }
+

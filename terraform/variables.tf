@@ -36,7 +36,4 @@ variable "cluster_name" {
   description = "cluster name"
   type = string
 }
-<<<<<<< HEAD
 >>>>>>> a344fc4 (eks-updated)
-=======
->>>>>>> 7655d40 (eks updated)
