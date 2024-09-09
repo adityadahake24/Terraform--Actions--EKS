@@ -59,4 +59,7 @@ output "cluster_endpoint" {
 output "cluster_security_group_id" {
   value = module.eks.cluster_security_group_id
 }
+<<<<<<< HEAD
 >>>>>>> a344fc4 (eks-updated)
+=======
+>>>>>>> 7655d40 (eks updated)

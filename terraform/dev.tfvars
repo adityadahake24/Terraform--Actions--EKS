@@ -13,4 +13,8 @@ intra_subnets = ["10.0.5.0/24", "10.0.6.0/24"]
 azs = ["ap-south1a", "ap-south-1b"]
 =======
 azs = ["ap-south-1a", "ap-south-1b"]
+<<<<<<< HEAD
 >>>>>>> a344fc4 (eks-updated)
+=======
+
+>>>>>>> 7655d40 (eks updated)

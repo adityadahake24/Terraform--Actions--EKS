@@ -10,7 +10,7 @@ resource "kubernetes_namespace" "Autok8s" {
 }
 resource "kubernetes_manifest" "deploymnet" {
   manifest = {
-    
+
   }
 }
 resource "kubernetes_manifest" "services" {
