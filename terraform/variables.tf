@@ -26,3 +26,14 @@ variable "azs" {
   description = "availability zones"
   type = list(string)
 }
+<<<<<<< HEAD
+=======
+variable "name" {
+  description = "name"
+  type = string
+}
+variable "cluster_name" {
+  description = "cluster name"
+  type = string
+}
+>>>>>>> a344fc4 (eks-updated)

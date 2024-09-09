@@ -4,7 +4,11 @@ provider "aws" {
 
 locals {
   region = var.region
+<<<<<<< HEAD
   name   = "Terraform-Deployed-K8s"
+=======
+  name   = var.name
+>>>>>>> a344fc4 (eks-updated)
   vpc_cidr = var.vpc_cidr
   azs      = var.azs
   public_subnets  = var.public_subnets
