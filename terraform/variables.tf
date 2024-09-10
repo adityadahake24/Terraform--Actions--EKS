@@ -26,8 +26,6 @@ variable "azs" {
   description = "availability zones"
   type = list(string)
 }
-<<<<<<< HEAD
-=======
 variable "name" {
   description = "name"
   type = string
@@ -36,4 +34,11 @@ variable "cluster_name" {
   description = "cluster name"
   type = string
 }
->>>>>>> a344fc4 (eks-updated)
+variable "instance_types" {
+  description = "instance types ofr eks cluster"
+  type = list(string)
+}
+variable "ami_type" {
+  description = "the ami type for cluster"
+  type = string
+}

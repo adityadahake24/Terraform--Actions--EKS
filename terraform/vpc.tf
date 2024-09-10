@@ -2,15 +2,6 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.13.0"
 
-<<<<<<< HEAD
-  name = local.name
-  cidr = local.vpc_cidr
-
-  azs             = local.azs
-  private_subnets = local.private_subnets
-  public_subnets  = local.public_subnets
-  intra_subnets   = local.intra_subnets
-=======
   name = var.name
   cidr = var.vpc_cidr
 
@@ -18,7 +9,6 @@ module "vpc" {
   private_subnets = var.private_subnets
   public_subnets  = var.public_subnets
   intra_subnets   = var.intra_subnets
->>>>>>> a344fc4 (eks-updated)
 
   enable_nat_gateway = true
 

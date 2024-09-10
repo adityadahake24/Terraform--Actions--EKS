@@ -1,4 +1,4 @@
-env = "dev"
+env = "Prod"
 name = "Terraform-Deployed-K8s"
 cluster_name = "Autok8s"
 vpc_cidr = "10.0.0.0/16"
@@ -7,5 +7,5 @@ public_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
 private_subnets = ["10.0.3.0/24", "10.0.4.0/24"]
 intra_subnets = ["10.0.5.0/24", "10.0.6.0/24"]
 azs = ["ap-south-1a", "ap-south-1b"]
-instance_types = [ "t3.small" ]
+instance_types = [ "t3.large" ]
 ami_type = "AL2023_x86_64_STANDARD"
