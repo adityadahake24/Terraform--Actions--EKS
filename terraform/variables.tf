@@ -18,10 +18,6 @@ variable "private_subnets" {
   description = "the private cidr subnet ranges for k8s deployment"
   type = list(string)
 }
-variable "intra_subnets" {
-  description = "the internal subnet cidr ranges for communication"
-  type = list(string)
-}
 variable "azs" {
   description = "availability zones"
   type = list(string)

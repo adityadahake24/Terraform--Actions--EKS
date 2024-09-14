@@ -1,6 +1,13 @@
 provider "aws" {
   region = var.region
 }
+provider "helm" {
+  kubernetes {
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+    token                  = data.aws_eks_cluster_auth.cluster.token
+  }
+}
 
 locals {
   region = var.region
@@ -9,7 +16,6 @@ locals {
   azs      = var.azs
   public_subnets  = var.public_subnets
   private_subnets = var.private_subnets
-  intra_subnets   = var.intra_subnets
   tags = {
     name = var.env
   }

@@ -15,7 +15,7 @@ module "eks" {
 
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets
-  control_plane_subnet_ids = module.vpc.intra_subnets
+  control_plane_subnet_ids = module.vpc.private_subnets
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
@@ -32,22 +32,12 @@ module "eks" {
       desired_size = 1
     }
   }
-
+  iam_role_arn = aws_iam_role.eks_role.arn
   enable_cluster_creator_admin_permissions = true
 
-  access_entries = {
-    Role-assigned ={
-      principal_arn     = "arn:aws:iam::535002868034:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS"
-
-      policy_associations = {
-        assigned-policy ={
-          policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AmazonEKSServiceRolePolicy"
-        }
-      }
-    }
-  }
 
   tags = {
+    name = var.cluster_name
     Environment = var.env
     Terraform   = "true"
   }
@@ -55,6 +45,6 @@ module "eks" {
 output "cluster_endpoint" {
   value = module.eks.cluster_endpoint
 }
-#data "aws_eks_cluster_auth" "cluster" {
-#  name = aws_eks_cluster.example.name
-#}
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks.cluster_name
+}
