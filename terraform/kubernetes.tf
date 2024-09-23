@@ -11,17 +11,16 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
   token                  = data.aws_eks_cluster_auth.cluster.token
 }
-resource "kubernetes_namespace" "grafana" {
+resource "kubernetes_namespace" "grafana-ns" {
   metadata {
-    name = "grafana"
+    name = "grafana-ns"
   }
 }
-resource "kubernetes_deployment" "grafana" {
+resource "kubernetes_deployment" "grafana-deploy" {
   metadata {
-    name      = "grafana"
-    namespace = kubernetes_namespace.grafana.metadata[0].name
+    name      = "grafana-deploy"
+    namespace = "grafana-ns"
   }
-
   spec {
     replicas = 1
 
@@ -30,14 +29,12 @@ resource "kubernetes_deployment" "grafana" {
         app = "grafana"
       }
     }
-
     template {
       metadata {
         labels = {
           app = "grafana"
         }
       }
-
       spec {
         container {
           name  = "grafana"
@@ -54,7 +51,7 @@ resource "kubernetes_deployment" "grafana" {
 resource "kubernetes_service" "grafana" {
   metadata {
     name      = "grafana"
-    namespace = kubernetes_namespace.grafana.metadata[0].name
+    namespace = "grafana-ns"
   }
 
   spec {
@@ -70,18 +67,16 @@ resource "kubernetes_service" "grafana" {
     type = "ClusterIP"
   }
 }
-resource "kubernetes_ingress" "grafana" {
+resource "kubernetes_ingress" "grafana-ingress" {
   metadata {
     name      = "grafana-ingress"
-    namespace = kubernetes_namespace.grafana.metadata[0].name
+    namespace = "grafana-ns"
     annotations = {
-      "nginx.ingress.kubernetes.io/auth-url"    = "https://https://otpless.com/appid/AEI9J3HZVTZG7DQS39ML/auth"
-      "nginx.ingress.kubernetes.io/auth-signin" = "https://https://otpless.com/appid/AEI9J3HZVTZG7DQS39ML/login?redirect=$request_uri"
+      "kubernetes.io/ingress.class" = "nginx"
     }
   }
   spec {
     rule {
-      host = "grafana.yourdomain.com"
       http {
         path {
           path     = "/"
