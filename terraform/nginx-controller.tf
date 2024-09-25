@@ -1,5 +1,5 @@
 module "nginx-controller" {
-  source  = "terraform-iaac/nginx-controller/helm"
+  source = "terraform-iaac/nginx-controller/helm"
 
   additional_set = [
     {

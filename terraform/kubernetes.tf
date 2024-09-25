@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     kubernetes = {
-      source = "hashicorp/kubernetes"
+      source  = "hashicorp/kubernetes"
       version = "2.32.0"
     }
   }
@@ -79,13 +79,13 @@ resource "kubernetes_ingress" "grafana-ingress" {
     rule {
       http {
         path {
-          path     = "/"
+          path = "/"
           backend {
             service_name = kubernetes_service.grafana.metadata[0].name
             service_port = 3000
-            }
           }
         }
       }
     }
   }
+}

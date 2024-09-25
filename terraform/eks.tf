@@ -5,12 +5,12 @@ module "eks" {
   cluster_name    = var.cluster_name
   cluster_version = "1.30"
 
-  cluster_endpoint_public_access  = true
+  cluster_endpoint_public_access = true
 
   cluster_addons = {
-    coredns                = {most_recent = true}
-    kube-proxy             = {most_recent = true}
-    vpc-cni                = {most_recent = true}
+    coredns    = { most_recent = true }
+    kube-proxy = { most_recent = true }
+    vpc-cni    = { most_recent = true }
   }
 
   vpc_id                   = module.vpc.vpc_id
@@ -32,12 +32,12 @@ module "eks" {
       desired_size = 1
     }
   }
-  iam_role_arn = aws_iam_role.eks_role.arn
+  iam_role_arn                             = aws_iam_role.eks_role.arn
   enable_cluster_creator_admin_permissions = true
 
 
   tags = {
-    name = var.cluster_name
+    name        = var.cluster_name
     Environment = var.env
     Terraform   = "true"
   }
