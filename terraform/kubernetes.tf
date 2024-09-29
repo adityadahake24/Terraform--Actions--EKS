@@ -64,7 +64,7 @@ resource "kubernetes_service" "grafana" {
       target_port = 3000
     }
 
-    type = "ClusterIP"
+    type = "LoadBalancer"
   }
 }
 resource "kubernetes_ingress" "grafana-ingress" {

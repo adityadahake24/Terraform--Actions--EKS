@@ -4,7 +4,8 @@ module "eks" {
 
   cluster_name    = var.cluster_name
   cluster_version = "1.30"
-
+  iam_role_arn                             = aws_iam_role.eks_role.arn
+  enable_cluster_creator_admin_permissions = true
   cluster_endpoint_public_access = true
 
   cluster_addons = {
@@ -32,9 +33,6 @@ module "eks" {
       desired_size = 1
     }
   }
-  iam_role_arn                             = aws_iam_role.eks_role.arn
-  enable_cluster_creator_admin_permissions = true
-
 
   tags = {
     name        = var.cluster_name
