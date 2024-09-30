@@ -48,9 +48,9 @@ resource "kubernetes_deployment" "grafana-deploy" {
     }
   }
 }
-resource "kubernetes_service" "grafana" {
+resource "kubernetes_service" "grafana-svc" {
   metadata {
-    name      = "grafana"
+    name      = "grafana-svc"
     namespace = "grafana-ns"
   }
 
@@ -67,7 +67,8 @@ resource "kubernetes_service" "grafana" {
     type = "ClusterIP"
   }
 }
-resource "kubernetes_ingress" "grafana-ingress" {
+resource "kubernetes_ingress_v1" "grafana-ingress" {
+  wait_for_load_balancer = true
   metadata {
     name      = "grafana-ingress"
     namespace = "grafana-ns"
@@ -76,16 +77,21 @@ resource "kubernetes_ingress" "grafana-ingress" {
     }
   }
   spec {
+    ingress_class_name = "nginx"
     rule {
       http {
         path {
           path = "/"
           backend {
-            service_name = kubernetes_service.grafana.metadata[0].name
-            service_port = 3000
+            service {
+               name = kubernetes_service.grafana-svc.metadata.0.name
+               port {
+                 number = 3000
+               }
+              }
+            }
           }
         }
       }
     }
   }
-}
